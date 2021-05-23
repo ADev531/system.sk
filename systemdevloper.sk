@@ -1,0 +1,85 @@
+on load:
+	if {system.lang} is "ko-kr":
+		broadcast "[System.sk] 로드가 완료되었습니다."
+	if {system.lang} is "en-us":
+		broadcast "[System.sk] Load Complete!"
+	if {system.lang} is not set:
+		set {system.lang} to "en-us"
+		set {system.joinandquitmessage} to "true"
+		broadcast "[System.sk] Setup Complete!"
+		
+
+command /lang [<string>]:
+	trigger:
+		if arg 1 is "ko-kr":
+			set {system.lang} to arg 1
+			message "[System.sk] 언어가 설정되었습니다!"
+		if arg 1 is "en-us":
+			set {system.lang} to arg 1
+			message "[System.sk] Complete!"
+
+command /system [<string>] [<string>]:
+	trigger:
+		if arg 1 is "reset":
+			delete {system.joinandquitmessage}
+			delete {system.lang}
+			message "[System.sk] Reset Complete. Please Enter /system reload"
+		if arg 1 is "reload":
+			execute console command "/sk reload system.sk"
+		if arg 1 is "off":
+			if arg 2 is "joinandquitmessage":
+				set {system.joinandquitmessage} to "false"
+				if {system.lang} is "ko-kr":
+					message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 숨겨집니다!"
+				if {system.lang} is "en-us":
+					message "[System.sk] Complete!"
+		if arg 1 is "on":
+			if arg 2 is "joinandquitmessage":
+				set {system.joinandquitmessage} to "true"
+				if {system.lang} is "ko-kr":
+					message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 보입니다!"
+				if {system.lang} is "en-us":
+					message "[System.sk] Complete!"
+		if arg 1 is "version":	
+			if {system.lang} is "ko-kr":
+				message "[System.sk] 1부터 4까지 버전 코드를 입력해 주십시오."
+				message "1 - 기본"
+				message "2 - 개발자 버전"
+				message "3 - 알파 버전 (현재 버전)"
+				message "4 - 코드만 받기"
+				message "현재 버전 : 1.0알파"
+				message "생각하셨다면 /system version [버전 코드]를 입력해 주십시오."
+				if arg 2 is "2":
+					message "업데이트 형식을 바꾸는 중입니다..."
+					message "현재 없는 버전입니다."
+        if arg 2 is "1":
+          message "업데이트 형식을 바꾸는 중입니다..."
+          message "현재 없는 버전입니다."
+         if arg 2 is "5":
+          message "이 버전은 이스터에그입니다. 다운로드 하시겠습니까?
+	
+on first join:
+	if {system.lang} is "ko-kr":
+		if {system.joinandquitmessage} is "true":
+			set join message to "%player%님이 서버에 처음으로 접속했습니다!"
+	if {system.lang} is "en-us":
+		if {system.joinandquitmessage} is "true":
+			set join message to "%player%, Welcome!!"
+
+on join:
+	if {system.lang} is "ko-kr":
+		if {system.joinandquitmessage} is "true": 
+			set join message to "%player%님이 접속했습니다."
+	if {system.lang} is "en-us":
+		if {system.joinandquitmessage} is "true":
+			set join message to "%player% has Joined Server."
+
+on quit:
+	if {system.lang} is "ko-kr":
+		if {system.joinandquitmessage} is "true":
+			set quit message to "%player%님이 서버를 나갔습니다."
+	if {system.lang} is "en-us":
+		if {system.joinandquitmessage} is "true":
+			set quit message to "%player% Has Exited Server."
+
+
