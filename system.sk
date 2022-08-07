@@ -21,31 +21,32 @@ command /lang [<string>]:
 
 command /system [<string>] [<string>]:
 	trigger:
-		if arg 1 is "reset":
-			delete {system.joinandquitmessage}
-			delete {system.lang}
-			delete {system.isMaintenance}
-			message "[System.sk] Reset Complete. Please Enter /system reload"
-		if arg 1 is "reload":
-			execute console command "/sk reload system.sk"
-		if arg 1 is "joinandquitmessage":
-			if arg 2 is "off":
-				set {system.joinandquitmessage} to "false"
-				if {system.lang} is "ko-kr":
-					message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 숨겨집니다!"
-				if {system.lang} is "en-us":
-					message "[System.sk] Now Connection Message and Quit Message is be hidden!"
+		if player is op:
+			if arg 1 is "reset":
+				delete {system.joinandquitmessage}
+				delete {system.lang}
+				delete {system.isMaintenance}
+				message "[System.sk] Reset Complete. Please Enter /system reload"
+			if arg 1 is "reload":
+				execute console command "/sk reload system.sk"
+			if arg 1 is "joinandquitmessage":
+				if arg 2 is "off":
+					set {system.joinandquitmessage} to "false"
+					if {system.lang} is "ko-kr":
+						message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 숨겨집니다!"
+					if {system.lang} is "en-us":
+						message "[System.sk] Now Connection Message and Quit Message is be hidden!"
 			if arg 2 is "on":
 				set {system.joinandquitmessage} to "true"
 				if {system.lang} is "ko-kr":
 					message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 보입니다!"
 				if {system.lang} is "en-us":
 					message "[System.sk] Now Connection Message and Quit Message is showing!"
-		if arg 1 is "maintenance":
-			if arg 2 is "on":
-				set {system.isMaintenance} to "true"
-			if arg 2 is "off":
-				set {system.isMaintenance} to "false"
+			if arg 1 is "maintenance":
+				if arg 2 is "on":
+					set {system.isMaintenance} to "true"
+				if arg 2 is "off":
+					set {system.isMaintenance} to "false"
 on first join:
 	if player is not op:
 		if {system.isMaintenance} is "true":
@@ -77,5 +78,3 @@ on quit:
 	if {system.lang} is "en-us":
 		if {system.joinandquitmessage} is "true":
 			set quit message to "%player% Has Quited Server."
-
-
