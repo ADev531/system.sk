@@ -10,4 +10,6 @@ Commands :
 
 /system reload - Reloads System.sk
 
-/system joinandquitmessage (off/on) - Turn on off System.sk's Join and Quit Message.
+/system joinandquitmessage (off/on) - Turn on, off System.sk's Join and Quit Message.
+
+/system maintenance (off/on) - Turn on, off maintenace function.
