@@ -48,7 +48,7 @@ command /system [<string>] [<string>]:
 				set {system.isMaintenance} to "false"
 on first join:
 	if player is not op:
-		if {system.isMaintenance} is = "true":
+		if {system.isMaintenance} is "true":
 			kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
 	
 	if {system.lang} is "ko-kr":
@@ -60,7 +60,7 @@ on first join:
 
 on join:
 	if player is not op:
-		if {system.isMaintenance} is = "yes":
+		if {system.isMaintenance} is "true":
 			kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
 	
 	if {system.lang} is "ko-kr":
