@@ -36,12 +36,12 @@ command /system [<string>] [<string>]:
 						message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 숨겨집니다!"
 					if {system.lang} is "en-us":
 						message "[System.sk] Now Connection Message and Quit Message is be hidden!"
-			if arg 2 is "on":
-				set {system.joinandquitmessage} to "true"
-				if {system.lang} is "ko-kr":
-					message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 보입니다!"
-				if {system.lang} is "en-us":
-					message "[System.sk] Now Connection Message and Quit Message is showing!"
+				if arg 2 is "on":
+					set {system.joinandquitmessage} to "true"
+					if {system.lang} is "ko-kr":
+						message "[System.sk] 이제 접속 메시지와 퇴장 메시지가 보입니다!"
+					if {system.lang} is "en-us":
+						message "[System.sk] Now Connection Message and Quit Message is showing!"
 			if arg 1 is "maintenance":
 				if arg 2 is "on":
 					set {system.isMaintenance} to "true"
