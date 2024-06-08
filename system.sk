@@ -48,7 +48,7 @@ command /system [<string>] [<string>]:
 				if arg 2 is "off":
 					set {system.isMaintenance} to "false"
 			if arg 1 is "motd":
-				
+				set {system.motd} to arg 2 
 on first join:
 	if player is not op:
 		if {system.isMaintenance} is "true":
