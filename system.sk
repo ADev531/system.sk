@@ -2,13 +2,13 @@ on load:
 	if {system.lang} is "ko-kr":
 		broadcast "[System.sk] 로드가 완료되었습니다."
 	if {system.lang} is "en-us":
-		broadcast "[System.sk] Load Complete!"
+		broadcast "[System.sk] Loading is completed!"
 	if {system.lang} is not set:
 		set {system.lang} to "en-us"
 		set {system.joinandquitmessage} to "true"
 		set {system.isMaintenance} to "false"
-		broadcast "[System.sk] Setup Complete!"
-		
+		set {system.motd} to "System.sk powered server."
+		broadcast "[System.sk] Setup is completed!"
 
 command /lang [<string>]:
 	trigger:
@@ -29,7 +29,7 @@ command /system [<string>] [<string>]:
 				message "[System.sk] Reset Complete. Please Enter /system reload"
 			if arg 1 is "reload":
 				execute console command "/sk reload system.sk"
-			if arg 1 is "joinandquitmessage":
+			if arg 1 is "joinmsg":
 				if arg 2 is "off":
 					set {system.joinandquitmessage} to "false"
 					if {system.lang} is "ko-kr":
@@ -47,11 +47,15 @@ command /system [<string>] [<string>]:
 					set {system.isMaintenance} to "true"
 				if arg 2 is "off":
 					set {system.isMaintenance} to "false"
+			if arg 1 is "motd":
+				
 on first join:
 	if player is not op:
 		if {system.isMaintenance} is "true":
-			kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
-	
+			if {system.lang} is "ko-kr":
+				kick player due to "[System.sk] %nl% 서버가 점검중입니다. 나중에 접속해주세요."
+			if {system.lang} is "en-us":
+				kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
 	if {system.lang} is "ko-kr":
 		if {system.joinandquitmessage} is "true":
 			set join message to "%player%님이 서버에 처음으로 접속했습니다!"
@@ -59,10 +63,16 @@ on first join:
 		if {system.joinandquitmessage} is "true":
 			set join message to "%player%, has First Joined Server!"
 
+on ping:
+	set motd to "%{system.motd}%"
+
 on join:
 	if player is not op:
 		if {system.isMaintenance} is "true":
-			kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
+			if {system.lang} is "ko-kr":
+				kick player due to "[System.sk] %nl% 서버가 점검중입니다. 나중에 접속해주세요."
+			if {system.lang} is "en-us":
+				kick player due to "[System.sk] %nl% Server is Down for maintenance. Please Join Later."
 	
 	if {system.lang} is "ko-kr":
 		if {system.joinandquitmessage} is "true": 
